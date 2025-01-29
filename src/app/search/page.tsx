@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { IoSearch } from "react-icons/io5";
 import { useMemo, useState } from "react";
 import { regions } from "@/data/constants";
 import dynamic from "next/dynamic";
