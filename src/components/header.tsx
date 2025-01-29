@@ -20,7 +20,7 @@ const Header = () => {
           </div>
           <input
             type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 mx-2 text-sm rounded-lg block w-80 p-2.5 h-2/3 my-auto max-lg:hidden"
+            className="bg-gray-50 border border-gray-300 text-gray-900 mx-2 text-sm rounded-full block w-80 p-2.5 h-2/3 my-auto max-lg:hidden"
             placeholder="検索"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
