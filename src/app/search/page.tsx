@@ -79,7 +79,7 @@ export default function Search() {
               <div key={index}>
                 <h1 className="text-2xl font-bold text-gray-800 border-b-4 border-blue-950">{key}</h1>
                 <div className="flex overflow-x-scroll scroller">
-                  {word_search.get(key).map((item: any, index: Number) => {
+                  {word_search.get(key).map((item: { price: number; name: string; image: string; id: number }, index: number) => {
                     return <ItemCard key={`search_word_${index}`} price={item.price} name={item.name} image={item.image} id={item.id} />;
                   })}
                 </div>
