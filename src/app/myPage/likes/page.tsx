@@ -13,7 +13,7 @@ export default function Page() {
       <h1 className="text-2xl block font-bold text-center">マイいいね</h1>
       <div className="flex flex-wrap justify-center">
         {items.map((item, index) => {
-          return <ItemCard key={`likes_${index}`} image={item.image} name={item.name} price={item.price}></ItemCard>;
+          return <ItemCard key={`likes_${index}`} image={item.image} name={item.name} price={item.price} id={item.id}></ItemCard>;
         })}
       </div>
     </div>

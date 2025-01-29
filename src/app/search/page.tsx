@@ -11,7 +11,7 @@ import disasters from "@/data/disasters";
 export default function Search() {
   const [search, setSearch] = useState("");
   const searchParams = useSearchParams();
-  const Map = useMemo(
+  const DynamicMap = useMemo(
     () =>
       dynamic(() => import("../testmap/simpleMap"), {
         loading: () => <p>地図の読み込み中...</p>,
@@ -38,10 +38,56 @@ export default function Search() {
     }
   }
 
-  return searchParams.has("keyword") && searchParams.get("keyword") !== "" ? (
-    <div>
+  // 文字検索.
+  let word_search = null;
+  const word = searchParams.get("keyword");
+  if (searchParams.has("keyword") && word) {
+    const disaster_items = disasters.filter((disaster) => disaster.name.includes(word) || disaster.description.includes(word)).map((disaster) => disaster.id);
+    const merchandise_items = merchandise.filter((item) => item.name.includes(word) || item.description.includes(word) || disaster_items.includes(item.disaster));
+    if (searchParams.has("regional")) {
+      // 地域を基準に連想配列.
+      const region = new Map();
+      for (const item of merchandise_items) {
+        if (!region.has(item.region)) {
+          region.set(item.region, []);
+        }
+        region.get(item.region).push(item);
+      }
+      word_search = region;
+    } else {
+      // 商品カテゴリを基準に連想配列.
+      const category = new Map();
+      for (const item of merchandise_items) {
+        if (!category.has(item.category)) {
+          category.set(item.category, []);
+        }
+        category.get(item.category).push(item);
+      }
+      word_search = category;
+    }
+  }
+
+  return word_search ? (
+    <div className="mx-4 mt-5">
       <h1>検索結果</h1>
-      <p>キーワード: {searchParams.get("keyword")}</p>
+      {word_search.size === 0 ? (
+        <h1>該当商品が見つかりませんでした。</h1>
+      ) : (
+        <div>
+          {[...word_search.keys()].map((key, index) => {
+            return (
+              <div key={index}>
+                <h1 className="text-2xl font-bold text-gray-800 border-b-4 border-blue-950">{key}</h1>
+                <div className="flex overflow-x-scroll scroller">
+                  {word_search.get(key).map((item: any, index: Number) => {
+                    return <ItemCard key={`search_word_${index}`} price={item.price} name={item.name} image={item.image} id={item.id} />;
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   ) : region_search ? (
     <div>
@@ -51,7 +97,7 @@ export default function Search() {
       ) : (
         <div className="flex flex-wrap justify-center">
           {region_search.map((item, index) => {
-            return <ItemCard key={`search_region_${index}`} price={item.price} name={item.name} image={item.image} />;
+            return <ItemCard key={`search_region_${index}`} price={item.price} name={item.name} image={item.image} id={item.id} />;
           })}
         </div>
       )}
@@ -64,7 +110,7 @@ export default function Search() {
       ) : (
         <div className="flex flex-wrap justify-center">
           {disaster_search.map((item, index) => {
-            return <ItemCard key={`search_disaster_${index}`} price={item.price} name={item.name} image={item.image} />;
+            return <ItemCard key={`search_disaster_${index}`} price={item.price} name={item.name} image={item.image} id={item.id} />;
           })}
         </div>
       )}
@@ -81,8 +127,12 @@ export default function Search() {
           onChange={(e) => setSearch(e.target.value)}
         />
         <div className="flex my-5">
-          <button className="bg-red-600 text-white px-4 py-2 font-bold hover:bg-red-700 transition duration-300 mx-2">商品別に探す</button>
-          <button className="bg-green-600 text-white px-4 py-2 font-bold hover:bg-green-700 transition duration-300 mx-2">地域別に探す</button>
+          <Link href={`/search?keyword=${search}`}>
+            <button className="bg-red-600 text-white px-4 py-2 font-bold hover:bg-red-700 transition duration-300 mx-2">商品別に探す</button>
+          </Link>
+          <Link href={`/search?keyword=${search}&regional=true`}>
+            <button className="bg-green-600 text-white px-4 py-2 font-bold hover:bg-green-700 transition duration-300 mx-2">地域別に探す</button>
+          </Link>
         </div>
       </div>
       <h1 className="text-2xl font-bold text-gray-800 border-b-4 border-blue-950">地域名検索</h1>
@@ -99,7 +149,7 @@ export default function Search() {
       </div>
       <h1 className="text-2xl font-bold text-gray-800 border-b-4 border-blue-950">地図検索</h1>
       <div className="my-6">
-        <Map />
+        <DynamicMap />
       </div>
     </div>
   );

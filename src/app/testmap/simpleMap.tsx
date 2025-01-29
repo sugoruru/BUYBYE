@@ -13,7 +13,7 @@ const SimpleMap = () => {
   }
 
   return (
-    <MapContainer center={center} zoom={17}>
+    <MapContainer center={center} zoom={5}>
       <TileLayer attribution="© OpenStreetMap contributors" url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
       {positions.map((position, index) => {
         return (

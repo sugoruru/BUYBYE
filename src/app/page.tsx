@@ -16,7 +16,7 @@ export default function Home() {
               {merchandise
                 .filter((item) => item.disaster === disaster.id)
                 .map((item, index) => {
-                  return <ItemCard key={`home_merchandise_${index}`} image={item.image} name={item.name} price={item.price}></ItemCard>;
+                  return <ItemCard key={`home_merchandise_${index}`} image={item.image} name={item.name} price={item.price} id={item.id}></ItemCard>;
                 })}
             </div>
           </div>
