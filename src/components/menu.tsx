@@ -2,7 +2,7 @@
 import carts from "@/data/carts";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IoHome, IoHomeOutline, IoSearch, IoSearchOutline, IoCart, IoCartOutline, IoPerson, IoPersonOutline } from "react-icons/io5";
+import { IoHome, IoHomeOutline, IoSearch, IoSearchOutline, IoCart, IoCartOutline, IoPerson, IoPersonOutline, IoChatboxEllipses, IoChatboxEllipsesOutline } from "react-icons/io5";
 
 const Menu = () => {
   const pathname = usePathname();
@@ -22,6 +22,9 @@ const Menu = () => {
         </Link>
         <Link href="/myPage" className="my-auto">
           {pathname.split("/")[1] === "myPage" ? <IoPerson className="text-3xl" /> : <IoPersonOutline className="text-3xl" />}
+        </Link>
+        <Link href="/articles" className="my-auto">
+          {pathname.split("/")[1] === "articles" ? <IoChatboxEllipses className="text-3xl" /> : <IoChatboxEllipsesOutline className="text-3xl" />}
         </Link>
       </div>
     </div>

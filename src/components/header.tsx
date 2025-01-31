@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { IoCart, IoSearch } from "react-icons/io5";
+import { IoCart, IoChatboxEllipses, IoSearch } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { FaRegCircleUser } from "react-icons/fa6";
 import carts from "@/data/carts";
@@ -33,6 +33,9 @@ const Header = () => {
           <div className="my-auto mx-1 cursor-pointer">
             <IoIosNotifications className="text-3xl text-black" />
           </div>
+          <Link href="/articles" className="my-auto mx-1 cursor-pointer">
+            <IoChatboxEllipses className="text-3xl text-black" />
+          </Link>
           <div className="my-auto mx-1">
             <Link href="/cart">
               <div className="cart" data-num={carts.filter((cart) => cart.userId === "taro111").length}>
