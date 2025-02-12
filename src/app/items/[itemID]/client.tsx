@@ -16,10 +16,20 @@ const Client = ({ params }: { params: { strItemID: string } }) => {
       ) : (
         <div>
           <div className="sm:flex">
-            <Image src={item.image} alt={item.name} width={100} height={100} className="w-96 h-96 max-sm:mx-auto max-sm:my-8 sm:my-5" />
+            <Image
+              src={item.image}
+              alt={item.name}
+              width={100}
+              height={100}
+              className="w-96 h-96 max-sm:mx-auto max-sm:my-8 sm:my-5"
+            />
             <div className="w-full">
-              <h1 className="max-sm:my-8 text-3xl font-bold sm:mx-5 sm:my-5">{item.name}</h1>
-              <h1 className="max-sm:my-8 text-3xl font-bold sm:mx-5 sm:my-5 text-blue-950 border-b-2 border-blue-950">{item.price}円</h1>
+              <h1 className="max-sm:my-8 text-3xl font-bold sm:mx-5 sm:my-5">
+                {item.name}
+              </h1>
+              <h1 className="max-sm:my-8 text-3xl font-bold sm:mx-5 sm:my-5 text-blue-950 border-b-2 border-blue-950">
+                {item.price}円
+              </h1>
               <p className="max-sm:my-8 sm:mx-5 sm:my-5">{item.description}</p>
               <div className="flex justify-end max-sm:my-8 sm:mx-5 sm:my-5">
                 <button
@@ -30,13 +40,20 @@ const Client = ({ params }: { params: { strItemID: string } }) => {
                 >
                   カートに追加
                 </button>
-                <button className="bg-green-600 text-white px-4 py-2 font-bold hover:bg-green-700 transition duration-300" onClick={() => setIsOpen(true)}>
+                <button
+                  className="bg-green-600 text-white px-4 py-2 font-bold hover:bg-green-700 transition duration-300"
+                  onClick={() => setIsOpen(true)}
+                >
                   今すぐ購入
                 </button>
               </div>
             </div>
           </div>
-          <BuyingDialog isOpen={isOpen} setIsOpen={setIsOpen} price={item.price} />
+          <BuyingDialog
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            price={item.price}
+          />
         </div>
       )}
     </div>
