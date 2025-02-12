@@ -31,10 +31,11 @@ export default function MyPage() {
       </div>
       <div className="border-[3px] mx-5 my-5 text-center rounded-lg border-red-600">
         <div className="px-2 py-4 text-2xl text-gray-700">
-          累計割引額　<span className="text-blue-800 font-bold">¥ 5200</span>
+          累計保険割引額　
+          <span className="text-blue-800 font-bold">¥ 1591</span>
           <br />
-          今年の残り割引額　
-          <span className="text-blue-800 font-bold">¥ 250</span>
+          今年の保険割引額　
+          <span className="text-blue-800 font-bold">¥ 1591</span>
         </div>
       </div>
       <div className="grid grid-cols-2 mx-5 gap-5 my-5">
